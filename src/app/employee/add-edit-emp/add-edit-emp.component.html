@@ -1,0 +1,73 @@
+<div class="flex items-center h-screen justify-center  ">
+  <div class="p-6  w-1/2 bg-gray-100 shadow-md rounded-md mx-auto">
+    <h2 class="text-2xl font-semibold text-center text-gray-700 mb-4">Employee Details</h2>
+  
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Fixed Fields -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Name</label>
+        <input 
+          formControlName="name"
+          type="text" 
+          class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter employee's name"
+        />
+      </div>
+  
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Position</label>
+        <input 
+          formControlName="position"
+          type="text"
+          class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter employee's position"
+        />
+      </div>
+  
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Email</label>
+        <input 
+          formControlName="email"
+          type="email"
+          class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter employee's email"
+        />
+      </div>
+  
+      <!-- Custom Fields Section -->
+       <div formArrayName="customFields" class="flex flex-col gap-2 max-h-52 overflow-y-auto">
+         @for(customField of customFields.controls; track customField; let i = $index;){
+           <div [formGroupName]="i" class="border p-3 bg-white rounded-md shadow-md">
+             <div class="mb-2">
+               <label class="block text-gray-700 font-medium">Custom Field Key</label>
+               <input 
+                 formControlName="key"
+                 type="text" 
+                 class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 placeholder="Custom Field Key"
+               />
+             </div>
+             <div>
+               <label class="block text-gray-700 font-medium">Value</label>
+               <input 
+                 formControlName="value"
+                 type="text" 
+                 class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 placeholder="Value"
+               />
+             </div>
+             <button type="button" (click)="removeCustomField(i)" class="text-red-500 mt-2">Remove</button>
+           </div>
+         }
+       </div>
+  
+      <!-- Add Custom Field Button -->
+      <button type="button" (click)="addCustomField()" class="w-full bg-blue-500 text-white p-2 rounded-md mt-4">
+        Add Custom Field
+      </button>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="w-full bg-green-500 text-white p-2 rounded-md mt-4">Save Employee</button>
+    </form>
+  </div>
+</div>

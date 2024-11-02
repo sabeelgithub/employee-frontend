@@ -1,0 +1,123 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="w-full max-w-md p-8 space-y-4 bg-white border border-gray-200 rounded-lg shadow-lg">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <h2 class="text-2xl font-semibold text-center text-gray-700">Register</h2>
+      
+      <div class="space-y-4">
+        <!-- Username field -->
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-600">Username</label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            placeholder="Enter your username"
+            class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          @if (registerForm.get('username')?.errors && registerForm.get('username')?.touched) {
+            <div class="mt-1 text-sm text-red-500">
+              @if (registerForm.get('username')?.errors?.['required']) {
+                <span>Username is required</span>
+              }
+              @if (registerForm.get('username')?.errors?.['minlength']) {
+                <span>Username must be at least 3 characters</span>
+              }
+            </div>
+          }
+        </div>
+        
+        <!-- Email field -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="Enter your email"
+            class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
+            <div class="mt-1 text-sm text-red-500">
+              @if (registerForm.get('email')?.errors?.['required']) {
+                <span>Email is required</span>
+              }
+              @if (registerForm.get('email')?.errors?.['email']) {
+                <span>Please enter a valid email</span>
+              }
+            </div>
+          }
+        </div>
+        
+        <!-- Phone field -->
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-600">Phone</label>
+          <input
+            type="tel"
+            id="phone"
+            formControlName="phone"
+            placeholder="Enter your phone number"
+            class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+        
+        <!-- Password field -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) {
+            <div class="mt-1 text-sm text-red-500">
+              @if (registerForm.get('password')?.errors?.['required']) {
+                <span>Password is required</span>
+              }
+              @if (registerForm.get('password')?.errors?.['minlength']) {
+                <span>Password must be at least 6 characters</span>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Confirm Password field -->
+        <div>
+          <label for="confirmPassword" class="block text-sm font-medium text-gray-600">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+            class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          @if (registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched) {
+            <div class="mt-1 text-sm text-red-500">
+              @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+                <span>Please confirm your password</span>
+              }
+            </div>
+          }
+          @if (registerForm.get('confirmPassword')?.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched) {
+            <div class="mt-1 text-sm text-red-500">
+              <span>Passwords do not match</span>
+            </div>
+          }
+        </div>
+      </div>
+      
+      <button
+        type="submit"
+        [disabled]="registerForm.invalid"
+        class="w-full px-4 py-2 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+      >
+        Register
+      </button>
+      
+      <p routerLink="/auth/login" class="mt-4 text-sm text-center cursor-pointer text-blue-600 hover:text-blue-800">
+        Already have an account? Login here
+      </p>
+    </form>
+  </div>
+</div>
