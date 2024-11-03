@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   changePassword(payload:any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/acounts/change-password/`,payload);
+    return this.http.post(`${this.baseUrl}/accounts/change-password/`,payload);
   }
 
 
